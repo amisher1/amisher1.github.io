@@ -1,0 +1,1 @@
+{"Version":3,"FileReferences":{"Moc":"mea.moc3","Textures":["mea.2048/texture_00.png","mea.2048/texture_01.png"],"Physics":"mea.physics3.json","DisplayInfo":"mea.cdi3.json","Motions":{"TapBody":[{"File":"motions/squint.motion3.json"}]}},"Groups":[{"Target":"Parameter","Name":"EyeBlink","Ids":["ParamEyeOpenL","ParamEyeOpenR"]},{"Target":"Parameter","Name":"LipSync","Ids":[]}]}

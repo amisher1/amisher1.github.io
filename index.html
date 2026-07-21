@@ -39,7 +39,7 @@
         @media (max-width: 768px) {
             body {
                 background-color: #f0f0f0;
-                background: url('/imgs/sendan.jpg');
+                background: url('/imgs/slide/background1.jpg');
                 background-attachment: fixed;
             }
         }
@@ -49,7 +49,7 @@
       if (document.images) {
         var avatar = new Image();
         avatar.src = '/imgs/avatar.jpg'
-        var previews = 'preview1.jpg,preview2.jpg,preview3.jpg,preview4.jpg'.split(',')
+        var previews = '1.gif,2.gif'.split(',')
         var previewsPreLoad = []
         for(var i = 0; i < length; i++) {
           previewsPreLoad.push(new Image())
@@ -195,7 +195,7 @@
                 <a href="/2026/07/21/test/">
                     <div class="img">
                         
-                        <img src="/imgs/preview/preview1.jpg" alt="Test">
+                        <img src="/imgs/preview/2.gif" alt="Test">
                     </div>
                     <div class="info">
                         
@@ -229,7 +229,7 @@
             <p style="text-align: center;">
                 <a href="/2026/07/21/test/">
                     
-                    <img src="/imgs/preview/preview1.jpg" alt="Test">
+                    <img src="/imgs/preview/1.gif" alt="Test">
                 </a>
             </p>
         </div>
@@ -418,11 +418,88 @@
     </div>
 </footer>
 
+<div style="position:absolute; bottom:120px left:auto; width:85%">
+    <iframe frameborder="yes" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1870515873&auto=1&height=66"></iframe>
+</div>
+
 <!-- 回到顶端 -->
 <div id="gal-gotop">
     <i class="fa fa-angle-up"></i>
 </div>
+    <script>
+    const cdnPath = '/live2d/'
+    const config = {
+      // 资源路径
+      path: {
+        homePath: '/',
+        modelPath: cdnPath + '/Resources/',
+        cssPath: cdnPath + '/waifu.css',
+        tipsJsonPath: cdnPath + '/waifu-tips.json',
+        tipsJsPath: cdnPath + '/waifu-tips.js',
+        live2dCorePath: cdnPath + '/Core/live2dcubismcore.js',
+        live2dSdkPath: cdnPath + '/live2d-sdk.js',
+      },
+      // 工具栏
+      tools: [
+        'hitokoto',
+        'asteroids',
+        'express',
+        'switch-model',
+        'switch-texture',
+        'photo',
+        'info',
+        'quit',
+      ],
+      // 模型拖拽
+      drag: {
+        enable: false,
+        direction: ['x', 'y'],
+      },
+      // 模型切换(order: 顺序切换，random: 随机切换)
+      switchType: 'order',
+    }
+
+    // 加载资源并初始化
+    if (screen.width >= 768) {
+      Promise.all([
+        loadExternalResource(config.path.cssPath, 'css'),
+        loadExternalResource(config.path.live2dCorePath, 'js'),
+        loadExternalResource(config.path.live2dSdkPath, 'js'),
+        loadExternalResource(config.path.tipsJsPath, 'js'),
+      ]).then(() => {
+        initWidget({
+          waifuPath: config.path.tipsJsonPath,
+          cdnPath: config.path.modelPath,
+          tools: config.tools,
+          dragEnable: config.drag.enable,
+          dragDirection: config.drag.direction,
+          switchType: config.switchType,
+        })
+      })
+    }
+
+    // 异步加载资源
+    function loadExternalResource(url, type) {
+      return new Promise((resolve, reject) => {
+        let tag
+        if (type === 'css') {
+          tag = document.createElement('link')
+          tag.rel = 'stylesheet'
+          tag.href = url
+        } else if (type === 'js') {
+          tag = document.createElement('script')
+          tag.src = url
+        }
+        if (tag) {
+          tag.onload = () => resolve(url)
+          tag.onerror = () => reject(url)
+          document.head.appendChild(tag)
+        }
+      })
+    }
+  </script>
 </body>
+
 
 <script src="/js/activate-power-mode.js"></script>
 
